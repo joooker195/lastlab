@@ -1,4 +1,4 @@
-package service;
+package db;
 
 import model.Buyer;
 import org.springframework.stereotype.Repository;

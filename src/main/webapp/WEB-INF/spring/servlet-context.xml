@@ -81,19 +81,19 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>  <!--enable @Transactional-->
 
-    <!--<bean id="productService" class="service.ProductService">-->
+    <!--<bean id="productService" class="db.ProductService">-->
     <!--</bean>-->
 
-    <!--<bean id="discountService" class="service.DiscountService">-->
+    <!--<bean id="discountService" class="db.DiscountService">-->
     <!--</bean>-->
 
-    <bean id="buyerService" class="service.BuyerService">
+    <bean id="buyerService" class="db.BuyerService">
     </bean>
 
-    <!--<bean id="saleService" class="service.SaleService">-->
+    <!--<bean id="saleService" class="db.SaleService">-->
     <!--</bean>-->
 
-    <!--<bean id="sellerService" class="service.SellerService">-->
+    <!--<bean id="sellerService" class="db.SellerService">-->
     <!--</bean>-->
 
 </beans:beans>

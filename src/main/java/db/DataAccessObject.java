@@ -1,4 +1,4 @@
-package service;
+package db;
 
 import exception.FlightNotFoundException;
 import exception.PlaneNotFoundException;
@@ -18,6 +18,17 @@ public class DataAccessObject
      * @throws SQLException
      * @throws ClassNotFoundException
      */
+
+    public static void  initConnection()throws SQLException,ClassNotFoundException{
+        try{
+            getPlanes();
+            getAirports();
+            getRoutes();
+            getFlights();
+        }catch (Exception e){
+            System.err.println(e.toString());
+        }
+    }
 
     private static Hdb.Plane dbPlane = new Hdb.Plane();
     private static Hdb.Airport dbAirport = new Hdb.Airport();
