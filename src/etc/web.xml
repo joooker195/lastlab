@@ -40,18 +40,18 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>120</session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/page/index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-<!--    <error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/pages/404.jsp</location>
-    </error-page>-->
+    </error-page>
     <resource-ref>
         <description>database</description>
         <res-ref-name>jdbc/kssa</res-ref-name>

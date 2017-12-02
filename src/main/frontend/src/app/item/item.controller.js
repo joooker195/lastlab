@@ -6,18 +6,24 @@
   function ItemController($scope,$http) {
     var vm  =this;
     $scope.sendRequest = function () {
-      var promise = $http.get("../../data/products.json");
-      promise.then(fulfilled, rejected)
+      $http({
+               method: "GET",
+                url: "http://localhost:8080/crudGoods/rest/getAllBuyers",
+                params:{
+                 fileName:"BEN_120.DAT"
+                }
+           }).then(function (resp) {
+             debugger;
+                    console.log("Профиль", resp)
+                    $scope.filrnames=resp.data;
+                  },
+                function (result) {
+             debugger;
+                    console.error(result, result.data);
+                  });
     };
+    $scope.hello = "dfffgd";
 
-    function fulfilled(response) {
-      console.log(response);
-      $scope.items = response.data;
-    }
-
-    function rejected(err) {
-      console.log(err);
-    }
 
     vm.addProductClickHandler = function () {
       alert("qwe");

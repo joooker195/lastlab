@@ -3,11 +3,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.ssau</groupId>
-    <artifactId>alma</artifactId>
+    <artifactId>lastLab</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
     <name>crudGoods</name>
-    <url>http://localhost:8080</url>
 
     <properties>
         <spring.version>4.3.4.RELEASE</spring.version>

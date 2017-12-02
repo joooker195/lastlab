@@ -17,11 +17,11 @@ public class BuyerController {
     @Autowired
     private BuyerService buyerService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/welcome")
-    public ModelAndView welcome(){
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/welcome")
+//    public ModelAndView welcome(){
+//        ModelAndView modelAndView = new ModelAndView("index");
+//        return modelAndView;
+//    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllBuyers")
     public @ResponseBody List<Buyer> getAllBuyerrs(){
