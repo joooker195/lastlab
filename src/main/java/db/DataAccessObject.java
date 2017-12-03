@@ -19,7 +19,7 @@ public class DataAccessObject
      * @throws ClassNotFoundException
      */
 
-    public static void  initConnection()throws SQLException,ClassNotFoundException{
+    public static void  initConnection()throws ClassNotFoundException{
         try{
             getPlanes();
             getAirports();

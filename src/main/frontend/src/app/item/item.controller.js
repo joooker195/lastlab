@@ -22,11 +22,8 @@
                     console.error(result, result.data);
                   });
     };
-    $scope.hello = "dfffgd";
-
-
     vm.addProductClickHandler = function () {
-      alert("qwe");
+
     };
 
     $scope.editProductHandler = function () {

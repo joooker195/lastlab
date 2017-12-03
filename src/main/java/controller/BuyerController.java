@@ -1,4 +1,4 @@
-package ru.ssau.controllers;
+package controller;
 
 import model.Buyer;
 import org.springframework.beans.factory.annotation.Autowired;
