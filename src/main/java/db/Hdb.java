@@ -1,5 +1,6 @@
 package db;
 
+import model.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,251 +12,214 @@ import java.util.List;
 
 public class Hdb
 {
-    @Repository
-    static class Plane
-    {
-        @PersistenceContext
-        private static EntityManager entityManager;
-
-        @Transactional
-        public List<model.Plane> getAll(){//++
-            String query = "from Plane order by id";
-            TypedQuery<model.Plane> typedQuery = entityManager.createQuery(query, model.Plane.class);
-            List<model.Plane> planes = typedQuery.getResultList();
-            return planes;
-        }
-
-        @Transactional
-        public void add(model.Plane plane){
-            entityManager.persist(plane);
-        }
-
-        @Transactional
-        public void update(model.Plane plane){
-            entityManager.merge(plane);
-        }
-
-        @Transactional
-        public model.Plane get(int id){
-            return entityManager.find(model.Plane.class, id);
-        }
-
-        @Transactional
-        public void remove(int id)
-        {
-            model.Plane plane = this.get(id);
-            entityManager.remove(plane);
-        }
-
-        @Transactional
-        public ArrayList<model.Plane> getWhere(String id,
-                                               String name, String number, String passengerSeatsCount, String fuelCons)
-        {
-            List<model.Plane> planes = this.getAll();
-            ArrayList<model.Plane> arr = new ArrayList<>();
-            for(model.Plane plane: planes)
-            {
-                if( String.valueOf(plane.getId()).equals(id) || plane.getNumber().equals(number) || plane.getName().equals(name)
-                        || String.valueOf(plane.getFuelConsumption()).equals(fuelCons)
-                        || String.valueOf(plane.getPassengerSeatsCount()).equals(passengerSeatsCount))
-                {
-                    arr.add(plane);
-                }
-            }
-            if(arr.size() == 0)
-            {
-                return (ArrayList) planes;
-            }
-            else
-            {
-                return arr;
-            }
-        }
-
-    }
 
     @Repository
-    static class Airport
+    public static class Buyer
     {
         @PersistenceContext
         private EntityManager entityManager;
 
         @Transactional
-        public List<model.Airport> getAll(){//++
-            String query = "from modal.Airport order by id";
-            TypedQuery<model.Airport> typedQuery = entityManager.createQuery(query, model.Airport.class);
-            List<model.Airport> airports = typedQuery.getResultList();
-            return airports;
+        public List<model.Buyer> getAll(){//++
+            String query = "from Buyer order by id";
+            TypedQuery<model.Buyer> typedQuery = entityManager.createQuery(query, model.Buyer.class);
+            List<model.Buyer> buyers = typedQuery.getResultList();
+            buyers.forEach( elm -> {
+                elm.getDiscounts().size();
+            });
+            return buyers;
         }
 
         @Transactional
-        public void add(model.Airport airport){
-            entityManager.persist(airport);
+        public void addBuyer(model.Buyer buyer){
+            entityManager.persist(buyer);
         }
 
         @Transactional
-        public void update(model.Airport airport){
-            entityManager.merge(airport);
+        public void updateBuyer(model.Buyer newBuyer){
+            entityManager.merge(newBuyer);
         }
 
         @Transactional
-        public model.Airport get(int id){
-            return entityManager.find(model.Airport.class,id);
+        public model.Buyer getBuyerById(int id){
+            return entityManager.find(model.Buyer.class,id);
         }
 
         @Transactional
-        public void remove(int id){
-
-            model.Airport airport = this.get(id);
-            entityManager.remove(airport);
-        }
-
-        @Transactional
-        public ArrayList<model.Airport> getWhere(String id,String location,String title)
-        {
-            List<model.Airport> airports = this.getAll();
-            ArrayList<model.Airport> arr = new ArrayList<>();
-            for(model.Airport airport: airports)
-            {
-                if(String.valueOf(airport.getId()).equals(id) || airport.getLocation().equals(location)
-                        || airport.getName().equals(title))
-                {
-                    arr.add(airport);
-                }
-            }
-            if(arr.size() == 0)
-            {
-                return (ArrayList) airports;
-            }
-            else
-            {
-                return arr;
-            }
+        public void removeBuyer(model.Buyer buyer){
+            entityManager.remove(entityManager.contains(buyer) ? buyer : entityManager.merge(buyer));
         }
     }
 
     @Repository
-    static class Route
+    public static class Product
+    {
+        @PersistenceContext
+        private EntityManager entityManager;
+
+        public Product() {
+        }
+
+        public EntityManager getEntityManager() {
+            return entityManager;
+        }
+
+        public void setEntityManager(EntityManager entityManager) {
+            this.entityManager = entityManager;
+        }
+
+        @Transactional
+        public List<model.Product> getAll(){//++
+            String query = "from Product order by id";
+            TypedQuery<model.Product> typedQuery = entityManager.createQuery(query, model.Product.class);
+            List<model.Product> resultList = typedQuery.getResultList();
+            resultList.forEach( elm -> {
+                elm.getDiscounts().size();
+            });
+            return resultList;
+        }
+
+        @Transactional
+        public void saveProducr(model.Product product){
+            entityManager.persist(product);
+        }
+
+        @Transactional
+        public void removeProduct(model.Product product){
+            entityManager.remove(product);
+        }
+
+        @Transactional
+        public model.Product findProductById(int id){
+            return entityManager.find(model.Product.class,id);
+        }
+
+        @Transactional
+        public void update(model.Product product){
+            entityManager.merge(product);
+        }
+
+        @Transactional
+        public void delete(model.Product product){
+            entityManager.remove(entityManager.contains(product) ? product : entityManager.merge(product));
+        }
+    }
+
+    @Repository
+    public static class Discount
+    {
+        @PersistenceContext
+        private EntityManager entityManager;
+
+        public Discount(){
+
+        }
+
+        @Transactional
+        public List<model.Discount> getAllDisc(){
+            String query = "from Discount order by id";
+            TypedQuery<model.Discount> typedQuery = entityManager.createQuery(query, model.Discount.class);
+            List<model.Discount> discounts = typedQuery.getResultList();
+            return discounts;
+        }
+
+        @Transactional
+        public void addDiscount(model.Discount discount) throws Exception{
+            entityManager.merge(discount);
+        }
+
+        @Transactional
+        public void updateDiscount(model.Discount discount){
+            entityManager.merge(discount);
+        }
+
+        @Transactional
+        public model.Discount findDiscountById(int id){
+            return entityManager.find(model.Discount.class,id);
+        }
+
+        @Transactional
+        public void deleteDiscount(model.Discount discount){
+            entityManager.remove(entityManager.contains(discount) ? discount : entityManager.merge(discount));
+        }
+    }
+
+    @Repository
+    public static class Sale
     {
         @PersistenceContext
         private EntityManager entityManager;
 
         @Transactional
-        public List<model.Route> getAll(){//++
-            String query = "from modal.Airport order by id";
-            TypedQuery<model.Route> typedQuery = entityManager.createQuery(query, model.Route.class);
-            List<model.Route> routes = typedQuery.getResultList();
-            return routes;
+        public List<model.Sale> getAllSells(){
+            String query = "from Sale order by id";
+            TypedQuery<model.Sale> typedQuery = entityManager.createQuery(query, model.Sale.class);
+            List<model.Sale> sales = typedQuery.getResultList();
+            sales.forEach( elm -> {
+                elm.getProducts().size();// lazy init
+            });
+            sales.forEach(s->s.getProducts().forEach(product -> product.getDiscounts().size()));
+            sales.forEach(elm->elm.getBuyer().getDiscounts().size());
+            return sales;
         }
 
         @Transactional
-        public void add(model.Route route){
-            entityManager.persist(route);
+        public void addSale(model.Sale sale){
+            entityManager.merge(sale);
         }
 
         @Transactional
-        public void update(model.Route route){
-            entityManager.merge(route);
+        public void updateSale(model.Sale sale){
+            entityManager.merge(sale);
         }
 
         @Transactional
-        public model.Route get(int id){
-            return entityManager.find(model.Route.class,id);
+        public model.Sale getSaleById(int id) {
+            return entityManager.find(model.Sale.class,id);
         }
 
         @Transactional
-        public void remove(int id){
-            model.Route route = this.get(id);
-            entityManager.remove(route);
-        }
-
-        @Transactional
-        public ArrayList<model.Route> getWhere(String id, String distance, String tp, String lp)
-        {
-            List<model.Route> routes = this.getAll();
-            ArrayList<model.Route> arr = new ArrayList<>();
-            for(model.Route r: routes)
-            {
-                if(String.valueOf(r.getId()).equals(id) || String.valueOf(r.getDistance()).equals(distance) || String.valueOf(r.getLandingPort()).equals(lp)
-                        || String.valueOf(r.getTakeOffPort()).equals(tp))
-                {
-                    arr.add(r);
-                }
-            }
-            if(arr.size() == 0)
-            {
-                return (ArrayList) routes;
-            }
-            else
-            {
-                return arr;
-            }
+        public void deleteSale(model.Sale sale){
+            entityManager.remove(entityManager.contains(sale) ? sale : entityManager.merge(sale));
         }
     }
 
     @Repository
-    static class Flight
+    public static class Seller
     {
         @PersistenceContext
         private EntityManager entityManager;
 
         @Transactional
-        public List<model.Flight> getAll(){//++
-            String query = "from modal.Flight order by id";
-            TypedQuery<model.Flight> typedQuery = entityManager.createQuery(query, model.Flight.class);
-            List<model.Flight> flights = typedQuery.getResultList();
-            return flights;
+        public List<model.Seller> getAllSellers(){
+            String query = "from Seller order by id";
+            TypedQuery<model.Seller> typedQuery = entityManager.createQuery(query, model.Seller.class);
+            List<model.Seller> sellers = typedQuery.getResultList();
+            sellers.forEach(seller->seller.getSale().getProducts().size());
+            sellers.forEach(seller -> seller.getSale().getProducts().forEach(product -> product.getDiscounts().size()));
+            sellers.forEach(seller -> seller.getSale().getBuyer().getDiscounts().size());
+            return sellers;
         }
 
         @Transactional
-        public void add(model.Flight flight){
-            entityManager.persist(flight);
+        public model.Seller getSellerById(int id){
+            return entityManager.find(model.Seller.class,id);
         }
 
         @Transactional
-        public void update(model.Flight flight){
-            entityManager.merge(flight);
+        public void addSeller(model.Seller seller){
+            entityManager.merge(seller);
         }
 
         @Transactional
-        public model.Flight get(int id){
-            return entityManager.find(model.Flight.class,id);
+        public void updateSeller(model.Seller seller){
+            entityManager.merge(seller);
         }
 
         @Transactional
-        public void remove(int id){
-            model.Flight flight = this.get(id);
-            entityManager.remove(flight);
+        public void deleteSeller(model.Seller seller){
+            entityManager.remove(entityManager.contains(seller) ? seller : entityManager.merge(seller));
         }
-
-        @Transactional
-        public ArrayList<model.Flight> getWhere(String id, String idp, String idr, String tiof, String lt)
-        {
-            List<model.Flight> flights = this.getAll();
-            ArrayList<model.Flight> arr = new ArrayList<>();
-            for(model.Flight f: flights)
-            {
-                if(String.valueOf(f.getId()).equals(id) || String.valueOf(f.getRoute()).equals(idr)
-                        || String.valueOf(f.getPlane()).equals(idp) || f.getLandingTimeShedule().equals(lt) || f.getTakeOffTimeShedule().equals(tiof))
-                {
-                    arr.add(f);
-                }
-            }
-            if(arr.size() == 0)
-            {
-                return (ArrayList) flights;
-            }
-            else
-            {
-                return arr;
-            }
-        }
-    }
-
-    @Repository
-    static class Buyer
-    {
-
     }
 
 }
