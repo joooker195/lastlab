@@ -252,4 +252,10 @@ public class Hdb
         }
     }
 
+    @Repository
+    static class Buyer
+    {
+
+    }
+
 }
