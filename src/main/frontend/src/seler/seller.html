@@ -1,0 +1,35 @@
+<h3>Продавцы</h3>
+<button class="btn btn-primary" ng-click="addNewSeller()">Добавить продавца</button>
+<div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Дата рождения</th>
+      <th>Email</th>
+      <th>Адрес доставки</th>
+      <th>Период продаж</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="seller in sellers">
+      <td style="display: none">{{seller.id}}</td>
+      <td>{{seller.firstName}}</td>
+      <td>{{seller.middleName}}</td>
+      <td>{{seller.lastName}}</td>
+      <td>{{seller.birthDate}}</td>
+      <td>{{seller.email}}</td>
+      <td>{{seller.deliveryAddress}}</td>
+      <td>c {{seller.orderDate}} по {{seller.deliveryDate}}</td>
+      <td>
+        <button class="btn btn-primary" ng-click="editSeller(this)">Изменить</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" ng-click="deleteSeller(this)">Удалить</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

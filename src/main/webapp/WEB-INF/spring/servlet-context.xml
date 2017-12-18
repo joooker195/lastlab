@@ -13,7 +13,7 @@
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
 
     <context:annotation-config />
-    <context:component-scan base-package="ru.ssau.controllers"/>
+    <context:component-scan base-package="controller"/>
 
 
     <!-- Enables the Spring MVC @Controller programming model -->
@@ -87,7 +87,7 @@
     <!--<bean id="discountService" class="db.DiscountService">-->
     <!--</bean>-->
 
-    <bean id="buyerService" class="db.BuyerService">
+    <bean id="buyerService" class="db.Hdb.Buyer">
     </bean>
 
     <!--<bean id="saleService" class="db.SaleService">-->

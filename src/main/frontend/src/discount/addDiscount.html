@@ -1,0 +1,25 @@
+<div>
+  <h3>Дата начала</h3>
+  <input type="text" placeholder="Введите дату начала скидки" ng-model="discountParams.actualFrom"  mask="99.99.9999" class="textField">
+  <h3>Дата окончания</h3>
+  <input type="text" placeholder="Введите дату окончания скидки" ng-model="discountParams.actualTo"  mask="99.99.9999" class="textField">
+  <h3>Размер скидки</h3>
+<input type="text" placeholder="Введите размер скидки %" ng-model="discountParams.amountDiscount" class="textField">
+  <h3>Выберите покупателя</h3>
+  <div class="hideScroll">
+      <select name="saleSelect" ng-model="discountParams.selectedBuyer" class="textField">
+        <option ng-repeat="option in buyers"
+                ng-value="option.id" class="panel panel-primary"> {{option.firstName}} {{option.middleName}} {{option.lastName}}</option>
+      </select>
+    </div><br>
+
+  <h3>Выберите товар</h3>
+    <div class="hideScroll">
+        <select name="saleSelect" ng-model="discountParams.selectedProduct" class="textField">
+          <option ng-repeat="option in products"
+                  ng-value="option.id" class="panel panel-primary"> {{option.name}}</option>
+        </select>
+      </div><br>
+  <button class="btn btn-primary" ng-click="discountOkClickHandler(this)">Добавить</button>
+  <button class="btn btn-danger" ng-click="discountCancelHandler(this)">Отмена</button>
+</div>

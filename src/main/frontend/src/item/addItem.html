@@ -1,0 +1,21 @@
+<div>
+  <h3>Название товара</h3>
+  <input type="text" id="ProductName" placeholder="Введите название товара" ng-model="params.name" class="textField">
+  <h3>Цена товара($)</h3>
+  <input type="text" placeholder="Введите цену товара" ng-model="params.unitCoast" class="textField">
+  <h3>Единица измерения</h3>
+  <input type="text" placeholder="Введите единицу измерения" ng-model="params.unitName" class="textField"><br>
+  <h3>Выберите продажу</h3>
+
+  <div class="hideScroll">
+    <select name="saleSelect" ng-model="params.selectedSale">
+      <option ng-repeat="option in sells"
+              ng-value="option.id" class="panel panel-primary"> Поставляется с {{option.orderDate}} по {{option.deliveryDate}}</option>
+    </select>
+  </div>
+
+  <div class="dialogButtons">
+  <button class="btn btn-primary" ng-click="dialogOkHandler(this)">Добавить</button>
+  <button class="btn btn-danger" ng-click="dialogCancelHandler(this)">Отмена</button>
+  </div>
+</div>

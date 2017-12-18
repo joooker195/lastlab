@@ -1,5 +1,16 @@
 <div>
-  <input type="text" placeholder="Введите название товара">
-  <input type="text" placeholder="Введите цену единицыы товара">
-  <input type="text" placeholder="Введите название товара">
+  <h3>Фамилия</h3>
+  <input type="text" placeholder="Введите фамилию" ng-model="buyerParams.firstName" class="textField">
+  <h3>Имя</h3>
+  <input type="text" placeholder="Введите имя" ng-model="buyerParams.middleName" class="textField">
+  <h3>Отчество</h3>
+  <input type="text" placeholder="Введите отчество" ng-model="buyerParams.lastName" class="textField">
+  <h3>Дата рождения</h3>
+  <input type="text" placeholder="Введите дату рождения" mask="99.99.9999" ng-model="buyerParams.birthDate" class="textField">
+  <h3>Телефон</h3>
+  <input type="text" placeholder="Введите телефон" ng-model="buyerParams.phoneNumber" class="textField">
+  <h3>Адрес проживания</h3>
+  <input type="text" placeholder="Введите адрес проживания" ng-model="buyerParams.livingAddress" class="textField"><br>
+  <button class="btn btn-primary" ng-click="buyerOkClickHandler(this)">Добавить</button>
+  <button class="btn btn-danger" ng-click="closeBuyerAddDialog(this)">Отменить</button>
 </div>

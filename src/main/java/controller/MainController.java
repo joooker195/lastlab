@@ -5,6 +5,8 @@ import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 
-public class Controller
+@Controller
+public class MainController
 {
     @Autowired
     private static Hdb.Buyer dbBuyer = new Hdb.Buyer();
@@ -58,7 +61,8 @@ public class Controller
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/addBuyer")
+
+    @RequestMapping(value = "/addBuyer")
     public static ResponseEntity addBuyer(@RequestParam(value = Buyer.FIRST_NAME_VALUE) String firstName,
                                    @RequestParam(value = Buyer.MIDDLE_NAME_VALUE) String middleName,
                                    @RequestParam(value = Buyer.LAST_NAME_VALUE) String lastName,

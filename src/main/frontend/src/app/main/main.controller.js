@@ -1,11 +1,10 @@
 (function () {
   'use strict';
-
   angular
     .module('frontend')
-    .controller('MainController', MainController);
+    .controller('N', N);
 
-  function MainController($scope,$http) {
+  function N($scope,$http) {
     var vm = this;
 
 
