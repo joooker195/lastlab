@@ -55,7 +55,7 @@
       $scope.buyerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.buyerParams.birthDate);
       console.log($scope.buyerParams);
       $http({
-       // method: "POST",
+        method: "POST",
         url: "http://localhost:8080/crudGoods/rest/addBuyer",
         params: $scope.buyerParams
       }).then(function (resp) {
@@ -73,7 +73,7 @@
 
     $scope.closeBuyerAddDialog = function (scope) {
       scope.closeThisDialog();
-    }
+    };
 
     $scope.editBuyer = function (tableScope) {
       $scope.entityId=tableScope.buyer.id;
@@ -90,12 +90,11 @@
     };
 
     $scope.editOkBuyerHandler = function (scope) {
-      debugger;
       $scope.buyerParams.id = scope.$parent.entityId;
       $scope.buyerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.buyerParams.birthDate);
       $http({
-      //  method: "POST",
-        url: "http://localhost:3000/crudGoods/rest/updateBuyer",
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/updateBuyer",
         params: $scope.buyerParams
       }).then(function (resp) {
           console.log("Покупатель обновлен");
@@ -107,7 +106,7 @@
           console.log("Покупатель  не обновлен");
           console.error(result, result.data);
         });
-    }
+    };
 
     $scope.deleteBuyer = function (scope) {
       var buyerId = scope.buyer.id;
@@ -119,7 +118,7 @@
         }
       }).then(function (resp) {
           console.log("Покупатель удален");
-          console.log("Success resp", resp)
+          console.log("Success resp", resp);
           $state.reload();
         },
         function (result) {

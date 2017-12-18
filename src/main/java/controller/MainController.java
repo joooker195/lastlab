@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -19,25 +16,26 @@ import java.util.List;
 public class MainController
 {
     @Autowired
-    private static Hdb.Buyer dbBuyer = new Hdb.Buyer();
+    private Hdb.Buyer dbBuyer;
     @Autowired
-    private static Hdb.Discount dbDiscount = new Hdb.Discount();
+    private Hdb.Discount dbDiscount;
     @Autowired
-    private static Hdb.Product dbProduct = new Hdb.Product();
+    private Hdb.Product dbProduct;
     @Autowired
-    private static Hdb.Sale dbSale = new Hdb.Sale();
+    private Hdb.Sale dbSale;
     @Autowired
-    private static Hdb.Seller dbSeller = new Hdb.Seller();
+    private Hdb.Seller dbSeller;
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllBuyers")
-    public static @ResponseBody
+    public @ResponseBody
     List<Buyer> getAllBuyerrs(){
         List<Buyer> buyers = dbBuyer.getAll();
         return buyers;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/updateBuyer")
-    public static ResponseEntity updateBuyer(
+    public ResponseEntity updateBuyer(
             @RequestParam(value = Buyer.ID_VALUE) Integer buyerId,
             @RequestParam(value = Buyer.FIRST_NAME_VALUE) String firstName,
             @RequestParam(value = Buyer.MIDDLE_NAME_VALUE) String middleName,
@@ -62,8 +60,9 @@ public class MainController
     }
 
 
-    @RequestMapping(value = "/addBuyer")
-    public static ResponseEntity addBuyer(@RequestParam(value = Buyer.FIRST_NAME_VALUE) String firstName,
+
+    @RequestMapping(method = RequestMethod.POST, value = "/addBuyer")
+    public ResponseEntity addBuyer(@RequestParam(value = Buyer.FIRST_NAME_VALUE) String firstName,
                                    @RequestParam(value = Buyer.MIDDLE_NAME_VALUE) String middleName,
                                    @RequestParam(value = Buyer.LAST_NAME_VALUE) String lastName,
                                    @RequestParam(value = Buyer.BIRTH_DATE_VALUE) Long birthDate,
@@ -80,8 +79,9 @@ public class MainController
 
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteBuyer")
-    public static ResponseEntity deleteBuyer(@RequestParam(value = Buyer.ID_VALUE) Integer buyerId){
+    public ResponseEntity deleteBuyer(@RequestParam(value = Buyer.ID_VALUE) Integer buyerId){
         try{
             Buyer deleted = dbBuyer.getBuyerById(buyerId);
             dbBuyer.removeBuyer(deleted);
@@ -94,13 +94,13 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getProducts")
-    public static  @ResponseBody List<Product> getAllProducts(){
+    public @ResponseBody List<Product> getAllProducts(){
         List<Product> products =dbProduct.getAll();
         return products;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/saveProduct")//++
-    public static ResponseEntity saveProduct(
+    public ResponseEntity saveProduct(
             @RequestParam(value = Product.NAME_VALUE) String productName,
             @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
             @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName,
@@ -118,7 +118,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/updateProduct")
-    public static ResponseEntity updateProduct(
+    public ResponseEntity updateProduct(
             @RequestParam(value = Product.ID_VALUE) Integer productId,
             @RequestParam(value = Product.NAME_VALUE) String productName,
             @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
@@ -138,7 +138,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/removeProduct")
-    public static ResponseEntity deleteProduct( @RequestParam(value = Product.ID_VALUE) Integer productId){
+    public ResponseEntity deleteProduct( @RequestParam(value = Product.ID_VALUE) Integer productId){
         try{
             Product product = dbProduct.findProductById(productId);
             dbProduct.delete(product);
@@ -151,13 +151,13 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getDiscounts")
-    public static  @ResponseBody List<Discount> getAddDiscounts(){
+    public  @ResponseBody List<Discount> getAddDiscounts(){
         List<Discount> discounts = dbDiscount.getAllDisc();
         return discounts;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addDiscount")
-    public static ResponseEntity addNewDiscount(
+    public ResponseEntity addNewDiscount(
             @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
             @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long actualTo,
             @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer amountDiscount,
@@ -175,7 +175,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/updateDiscount")
-    public static ResponseEntity updateDiscount(
+    public ResponseEntity updateDiscount(
             @RequestParam(value = Discount.ID_VALUE) Integer discountId,
             @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long newActualFromDate,
             @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long newActualToDate,
@@ -201,7 +201,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteDiscount")
-    public static ResponseEntity deleteDiscount(@RequestParam(value = Discount.ID_VALUE) Integer discountId){
+    public ResponseEntity deleteDiscount(@RequestParam(value = Discount.ID_VALUE) Integer discountId){
         Discount deleted = dbDiscount.findDiscountById(discountId);
         try{
             dbDiscount.deleteDiscount(deleted);
@@ -215,12 +215,12 @@ public class MainController
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllSells")
-    public static  @ResponseBody List<Sale> getAllSells(){
+    public @ResponseBody List<Sale> getAllSells(){
         return dbSale.getAllSells();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addSale")
-    public static ResponseEntity<Throwable> addSale(@RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
+    public ResponseEntity<Throwable> addSale(@RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
                                              @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate,
                                              @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
                                              @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId) {
@@ -237,7 +237,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/updateSale")
-    public static ResponseEntity updateSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId,
+    public ResponseEntity updateSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId,
                                      @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
                                      @RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
                                      @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate){
@@ -256,7 +256,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSale")
-    public static ResponseEntity deleteSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId){
+    public ResponseEntity deleteSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId){
         try{
             Sale deletedSale = dbSale.getSaleById(saleId);
             dbSale.deleteSale(deletedSale);
@@ -268,12 +268,12 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllSellers")//+
-    public static  @ResponseBody List<Seller> getAllSellers(){
+    public @ResponseBody List<Seller> getAllSellers(){
         return dbSeller.getAllSellers();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addSeller")
-    public static ResponseEntity addSeller(@RequestParam(value = Seller.FIRST_NAME_VALUE) String firstName,
+    public ResponseEntity addSeller(@RequestParam(value = Seller.FIRST_NAME_VALUE) String firstName,
                                     @RequestParam(value = Seller.MIDDLE_NAME_VALUE) String middleName,
                                     @RequestParam(value = Seller.LAST_NAME_VALUE) String lastName,
                                     @RequestParam(value = Seller.BIRTH_DATE_VALUE) Long birthDate,
@@ -293,7 +293,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/updateSeller")
-    public static ResponseEntity updateSeller(@RequestParam(value = Seller.ID_VALUE) Integer id,
+    public ResponseEntity updateSeller(@RequestParam(value = Seller.ID_VALUE) Integer id,
                                        @RequestParam(value = Seller.FIRST_NAME_VALUE) String firstName,
                                        @RequestParam(value = Seller.MIDDLE_NAME_VALUE) String middleName,
                                        @RequestParam(value = Seller.LAST_NAME_VALUE) String lastName,
@@ -321,7 +321,7 @@ public class MainController
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSeller")
-    public static ResponseEntity deleteSeller(@RequestParam(value = Seller.ID_VALUE) Integer sellerId){
+    public ResponseEntity deleteSeller(@RequestParam(value = Seller.ID_VALUE) Integer sellerId){
         try{
             Seller deleted = dbSeller.getSellerById(sellerId);
             dbSeller.deleteSeller(deleted);
