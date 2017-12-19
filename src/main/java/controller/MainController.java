@@ -99,6 +99,7 @@ public class MainController
         return products;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/saveProduct")//++
     public ResponseEntity saveProduct(
             @RequestParam(value = Product.NAME_VALUE) String productName,
@@ -117,6 +118,7 @@ public class MainController
 
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/updateProduct")
     public ResponseEntity updateProduct(
             @RequestParam(value = Product.ID_VALUE) Integer productId,
@@ -137,6 +139,7 @@ public class MainController
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.DELETE, value = "/removeProduct")
     public ResponseEntity deleteProduct( @RequestParam(value = Product.ID_VALUE) Integer productId){
         try{
@@ -150,12 +153,14 @@ public class MainController
 
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/getDiscounts")
     public  @ResponseBody List<Discount> getAddDiscounts(){
         List<Discount> discounts = dbDiscount.getAllDisc();
         return discounts;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/addDiscount")
     public ResponseEntity addNewDiscount(
             @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
@@ -174,6 +179,7 @@ public class MainController
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/updateDiscount")
     public ResponseEntity updateDiscount(
             @RequestParam(value = Discount.ID_VALUE) Integer discountId,
@@ -200,6 +206,7 @@ public class MainController
 
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteDiscount")
     public ResponseEntity deleteDiscount(@RequestParam(value = Discount.ID_VALUE) Integer discountId){
         Discount deleted = dbDiscount.findDiscountById(discountId);
@@ -214,6 +221,7 @@ public class MainController
     }
 
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/getAllSells")
     public @ResponseBody List<Sale> getAllSells(){
         return dbSale.getAllSells();
@@ -236,6 +244,7 @@ public class MainController
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/updateSale")
     public ResponseEntity updateSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId,
                                      @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
@@ -255,6 +264,7 @@ public class MainController
 
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSale")
     public ResponseEntity deleteSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId){
         try{
@@ -267,11 +277,13 @@ public class MainController
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/getAllSellers")//+
     public @ResponseBody List<Seller> getAllSellers(){
         return dbSeller.getAllSellers();
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/addSeller")
     public ResponseEntity addSeller(@RequestParam(value = Seller.FIRST_NAME_VALUE) String firstName,
                                     @RequestParam(value = Seller.MIDDLE_NAME_VALUE) String middleName,
@@ -292,6 +304,7 @@ public class MainController
 
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/updateSeller")
     public ResponseEntity updateSeller(@RequestParam(value = Seller.ID_VALUE) Integer id,
                                        @RequestParam(value = Seller.FIRST_NAME_VALUE) String firstName,
@@ -320,6 +333,7 @@ public class MainController
 
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSeller")
     public ResponseEntity deleteSeller(@RequestParam(value = Seller.ID_VALUE) Integer sellerId){
         try{

@@ -1,6 +1,8 @@
 package model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -59,6 +61,7 @@ public class Buyer
     private String livingAddress;
 
     @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Discount.class)
+    @JsonManagedReference
     private Set<Discount> discounts = new HashSet<Discount>();
 
 

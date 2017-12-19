@@ -27,7 +27,13 @@
   your browser</a> to improve your experience.</p>
 <![endif]-->
 <ul>
-  <li ui-sref="buyers">Покупатели</li>
+  <!--<li ui-sref="buyers">Покупатели</li>
+  <li ui-sref="item">Товар</li>-->
+  <button ui-sref="products" class="btn btn-primary menu">Товар</button>
+  <button ui-sref="discounts" class="btn btn-primary menu">Скидка</button>
+  <button ui-sref="buyers" class="btn btn-primary menu">Покупатели</button>
+  <button ui-sref="sales" class="btn btn-primary menu">Продажи</button>
+  <button ui-sref="sellers" class="btn btn-primary menu">Продавцы</button>
 </ul>
 
 <div ui-view="index"></div>

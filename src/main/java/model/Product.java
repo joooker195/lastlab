@@ -1,5 +1,8 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,10 +44,12 @@ public class Product
     private String unitName;
 
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,targetEntity = Discount.class,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Discount> discounts = new HashSet<Discount>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sale_id")
+    @JsonBackReference
     private Sale sale;
 
 
@@ -89,6 +94,8 @@ public class Product
         this.name = name;
         this.unitCoast = unitCoast;
         this.unitName = unitName;
+    }
+    public Product() {
     }
 
     public int getId() {
