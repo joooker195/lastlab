@@ -46,8 +46,7 @@
     $scope.saleParams = {
       orderDate:"",
       deliveryDate : "",
-      amountProduct:"",
-      selectedBuyer:[]
+      amountProduct:""
     };
     $scope.showAddDiv = false;
 
