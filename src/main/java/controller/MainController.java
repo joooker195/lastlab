@@ -231,9 +231,14 @@ public class MainController
     public ResponseEntity<Throwable> addSale(@RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
                                              @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate,
                                              @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
-                                             @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId) {
+                                             @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId,
+                                             @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer sellerId,
+                                             @RequestParam(value = Sale.SELECTED_ITEM_ID) Integer itemId) {
         Buyer selectedBuyer = dbBuyer.getBuyerById(buyerId);
-        Sale sale = new Sale(new Date(orderDate),new Date(deliveryDate),amountProduct,selectedBuyer);
+        Seller selectedSeller = dbSeller.getSellerById(sellerId);
+        Product selectedProduct = dbProduct.findProductById(itemId);
+        Sale sale = new Sale(new Date(orderDate),new Date(deliveryDate),amountProduct,selectedBuyer, selectedSeller,
+                selectedProduct);
         try {
             dbSale.addSale(sale);
         }

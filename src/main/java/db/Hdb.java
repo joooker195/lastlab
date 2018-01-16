@@ -148,6 +148,11 @@ public class Hdb
     @Repository
     public static class Sale
     {
+        public Sale()
+        {
+
+        }
+
         @PersistenceContext
         private EntityManager entityManager;
 
@@ -159,8 +164,10 @@ public class Hdb
             sales.forEach( elm -> {
                 elm.getProducts().size();// lazy init
             });
-            sales.forEach(s->s.getProducts().forEach(product -> product.getDiscounts().size()));
-            sales.forEach(elm->elm.getBuyer().getDiscounts().size());
+            sales.forEach(sale->sale.getProducts().forEach(product -> product.getDiscounts().size()));
+            sales.forEach(sale->sale.getBuyers().forEach(buyer -> buyer.getDiscounts().size()));
+            sales.forEach(sale->sale.getBuyers().size());
+           // sales.forEach(sale->sale.getSellers().size());
             return sales;
         }
 
@@ -191,6 +198,11 @@ public class Hdb
         @PersistenceContext
         private EntityManager entityManager;
 
+        public Seller()
+        {
+
+        }
+
         @Transactional
         public List<model.Seller> getAllSellers(){
             String query = "from Seller order by id";
@@ -198,7 +210,7 @@ public class Hdb
             List<model.Seller> sellers = typedQuery.getResultList();
             sellers.forEach(seller->seller.getSale().getProducts().size());
             sellers.forEach(seller -> seller.getSale().getProducts().forEach(product -> product.getDiscounts().size()));
-            sellers.forEach(seller -> seller.getSale().getBuyer().getDiscounts().size());
+            sellers.forEach(seller -> seller.getSale().getBuyers().size());
             return sellers;
         }
 

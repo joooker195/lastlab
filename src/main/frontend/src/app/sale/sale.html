@@ -7,7 +7,6 @@
       <th>Дата закааза</th>
       <th>Дата поставки</th>
       <th>Количество продукта</th>
-      <th>Покупатель</th>
       <th></th>
       <th></th>
       <th></th>
@@ -25,7 +24,7 @@
     </tbody>
   </table>
 
-  <p><input type="checkbox" ng-model="showAddDiv"/>Показать товары</p>
+  <!--<p><input type="checkbox" ng-model="showAddDiv"/>Показать товары</p>
 
   <div ng-show="showAddDiv">
 
@@ -34,10 +33,10 @@
             ng-class="{'active': $index === currentIndex}">
           <a href="#tab{{$index}}" data-toggle="tab" ng-click="saleCtrl.currentIndex = $index;">{{product.name}}</a>
         </li>
-      </ul>
+      </ul>-->
 
 
-      <div class="tab-content">
+      <!--<div class="tab-content">
         <div ng-repeat="product in salesProducts track by $index" class="tab-pane" id="tab{{$index}}"
              ng-class="{'active': $index === saleCtrl.currentIndex}">
           <div>
@@ -46,6 +45,5 @@
             <p>Ед. измерения  {{product.unitName}}</p>
           </div>
         </div>
-      </div>
-  </div>
+      </div>-->
 </div>

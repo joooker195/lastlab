@@ -22,9 +22,9 @@
   </tbody>
 </table>
 
-<p><input type="checkbox" ng-model="showAddDiv"/>Показать скидки</p>
+<!--<p><input type="checkbox" ng-model="showAddDiv"/>Показать скидки</p>-->
 
-<div ng-show="showAddDiv">
+<!--<div ng-show="showAddDiv">
   <div>
     <ul class="nav nav-tabs" ng-init="itemCtrl.currentIndex=0;">
       <li ng-repeat="discount in discountsMas track by $index"
@@ -34,7 +34,7 @@
     </ul>
 
 
-    <div class="tab-content">
+    &lt;!&ndash;<div class="tab-content">
       <div ng-repeat="discount in discountsMas track by $index" class="tab-pane" id="tab{{$index}}"
            ng-class="{'active': $index === itemCtrl.currentIndex}">
         <div>
@@ -43,6 +43,6 @@
           <p>Величина скидки {{discount.amountDiscount}} %</p>
         </div>
       </div>
-    </div>
-  </div>
+    </div>&ndash;&gt;
+  </div>-->
 </div>

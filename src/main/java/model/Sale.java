@@ -30,6 +30,12 @@ public class Sale
     @Transient
     public static final String SELECTED_BUYER_ID = "selectedBuyer";
 
+    @Transient
+    public static final String SELECTED_ITEM_ID = "selectedItem";
+
+    @Transient
+    public static final String SELECTED_SELLER_ID = "selectedSeller";
+
     @Id
     @GeneratedValue(generator = "SEQ_ID")
     @Column(name = "id")
@@ -51,21 +57,40 @@ public class Sale
     @JsonManagedReference
     private Set<Product> products = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "sale",targetEntity = Buyer.class)
+    @JsonManagedReference
+    private Set<Buyer> buyers = new HashSet<>();
+
+    /*@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "sale",targetEntity = Seller.class)
+    @JsonManagedReference
+    private Set<Seller> sellers = new HashSet<>();*/
+
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id")
     @JsonBackReference
-    private Buyer buyer;
+    private Buyer buyer;*/
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seller_id")
+   // @JsonBackReference
+    private Seller seller;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
+   // @JsonBackReference
+    private Product item;
 
     public Sale() {
     }
 
-    public Sale(int id, Date orderDate, Date deliveryDate, Set<Product> products, Set<Buyer> buyers, Set<Seller> sellers, int amountProduct) {
+    public Sale(int id, Date orderDate, Date deliveryDate, Set<Product> products, Buyer buyers, Seller seller, int amountProduct) {
         this.id = id;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.amountProduct = amountProduct;
+        this.products = products;
+      //  this.buyer = buyers;
+       // this.seller = seller;
     }
 
     public Sale(Date orderDate, Date deliveryDate, int amountProduct, Set<Product> products) {
@@ -79,7 +104,16 @@ public class Sale
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.amountProduct = amountProduct;
-        this.buyer = buyer;
+     //   this.buyer = buyer;
+    }
+
+    public Sale(Date orderDate, Date deliveryDate, int amountProduct, Buyer buyer, Seller seller, Product product) {
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.amountProduct = amountProduct;
+     //   this.buyer = buyer;
+      //  this.seller = seller;
+        this.item = product;
     }
 
     public Sale(Date orderDate, Date deliveryDate, int amountProduct, Set<Product> products, Buyer buyer) {
@@ -87,20 +121,20 @@ public class Sale
         this.deliveryDate = deliveryDate;
         this.amountProduct = amountProduct;
         this.products = products;
-        this.buyer = buyer;
+      //  this.buyer = buyer;
     }
 
     public int getId() {
         return id;
     }
 
-    public Buyer getBuyer() {
+/*    public Buyer getBuyer() {
         return buyer;
     }
 
     public void setBuyer(Buyer buyer) {
         this.buyer = buyer;
-    }
+    }*/
 
     public void setId(int id) {
         this.id = id;
@@ -130,11 +164,35 @@ public class Sale
         this.products = products;
     }
 
+    public Set<Buyer> getBuyers() {
+        return buyers;
+    }
+
+    public void setBuyers(Set<Buyer> buyers) {
+        this.buyers = buyers;
+    }
+
+   /* public Set<Seller> getSellers() {
+        return sellers;
+    }
+
+    public void setSellers(Set<Seller> sellers) {
+        this.sellers = sellers;
+    }*/
+
     public int getAmountProduct() {
         return amountProduct;
     }
 
     public void setAmountProduct(int amountProduct) {
         this.amountProduct = amountProduct;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 }

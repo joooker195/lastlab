@@ -25,6 +25,9 @@
     }
     $scope.salesProducts = products;
 
+
+
+
     var promise =$http.get("http://localhost:8080/crudGoods/rest/getAllBuyers");
     -      promise.then(fulfilled, rejected);
 
@@ -36,9 +39,43 @@
       console.log("Покупатели подгружены");
       $scope.salesBuyers =  resp.data;
     }
-
     function rejected(error) {
       console.log("Покупатели не подгружены");
+      console.log(error);
+    }
+
+
+
+    var promise =$http.get("http://localhost:8080/crudGoods/rest/getAllSellers");
+    -      promise.then(sellerFulfilled, sellerRejected);
+
+    function sellerFulfilled(resp) {
+      console.log(resp.data);
+      for (var i =0;i<resp.data.length;i++){
+        resp.data[i].birthDate = UtilsFunctionsFactory.toDate(resp.data[i].birthDate);
+      }
+      console.log("Продавцы подгружены");
+      $scope.salesSeller =  resp.data;
+    }
+    function sellerRejected(error) {
+      console.log("Продавцы не подгружены");
+      console.log(error);
+    }
+
+
+    var promise =$http.get("http://localhost:8080/crudGoods/rest/getProducts");
+    -      promise.then(productFulfilled, productRejected);
+
+    function productFulfilled(resp) {
+      console.log(resp.data);
+      /*for (var i =0;i<resp.data.length;i++){
+        resp.data[i].birthDate = UtilsFunctionsFactory.toDate(resp.data[i].birthDate);
+      }*/
+      console.log("Продукты подгружены");
+      $scope.salesProduct =  resp.data;
+    }
+    function productRejected(error) {
+      console.log("Продукты не подгружены");
       console.log(error);
     }
 
