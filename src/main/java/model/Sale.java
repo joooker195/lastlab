@@ -112,7 +112,7 @@ public class Sale
         this.deliveryDate = deliveryDate;
         this.amountProduct = amountProduct;
      //   this.buyer = buyer;
-      //  this.seller = seller;
+        this.seller = seller;
         this.item = product;
     }
 

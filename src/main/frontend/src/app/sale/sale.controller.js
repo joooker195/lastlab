@@ -25,6 +25,16 @@
     }
     $scope.salesProducts = products;
 
+    var buyers = [];
+    for (var i= 0;i<$scope.sales.length;i++){
+      var buyersS = $scope.sales[i].buyers;
+      console.log(buyersS);
+      for(var j =0;j<buyersS.length;j++){
+        buyers.unshift(buyersS[j]);
+      }
+    }
+    $scope.salesBuyers = buyers;
+
 
 
 
@@ -83,7 +93,10 @@
     $scope.saleParams = {
       orderDate:"",
       deliveryDate : "",
-      amountProduct:""
+      amountProduct:"",
+      selectedItem:0,
+      selectedBuyer:0,
+      selectedSeller:0
     };
     $scope.showAddDiv = false;
 
@@ -92,6 +105,9 @@
       $scope.saleParams.orderDate="";
       $scope.saleParams.deliveryDate="";
       $scope.saleParams.amountProduct="";
+      $scope.saleParams.selectedBuyer=0;
+      $scope.saleParams.selectedItem=0;
+      $scope.saleParams.selectedSeller=0;
       ngDialog.open({ template: 'app/sale/addSaleDialog.html',
         className: 'ngdialog-theme-default',
         scope: $scope

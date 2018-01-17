@@ -232,7 +232,7 @@ public class MainController
                                              @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate,
                                              @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
                                              @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId,
-                                             @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer sellerId,
+                                             @RequestParam(value = Sale.SELECTED_SELLER_ID) Integer sellerId,
                                              @RequestParam(value = Sale.SELECTED_ITEM_ID) Integer itemId) {
         Buyer selectedBuyer = dbBuyer.getBuyerById(buyerId);
         Seller selectedSeller = dbSeller.getSellerById(sellerId);

@@ -10,19 +10,19 @@
   <div class="hideScroll">
     <select name="buyerSelect" ng-model="saleParams.selectedBuyer" class="textField">
       <option ng-repeat="option in salesBuyers"
-              ng-value="option.id" class="panel panel-primary">{{option.firstName}}  {{option.lastName}}</option>
+              ng-value="option.id" class="panel panel-primary">{{option.firstName}}  {{option.middleName}}  {{option.lastName}}</option>
     </select>
   </div>
   <h3>Выберите продавца</h3>
   <div class="hideScroll">
-    <select name="buyerSelect" ng-model="saleParams.selectedSeller" class="textField">
+    <select name="sellerSelect" ng-model="saleParams.selectedSeller" class="textField">
       <option ng-repeat="option in salesSeller"
-              ng-value="option.id" class="panel panel-primary">{{option.firstName}}  {{option.lastName}}</option>
+              ng-value="option.id" class="panel panel-primary">{{option.firstName}}  {{option.middleName}}  {{option.lastName}}</option>
     </select>
   </div>
   <h3>Выберите товар</h3>
   <div class="hideScroll">
-    <select name="buyerSelect" ng-model="saleParams.selectedBuyer" class="textField">
+    <select name="productSelect" ng-model="saleParams.selectedItem" class="textField">
       <option ng-repeat="option in salesProduct"
               ng-value="option.id" class="panel panel-primary">{{option.name}}</option>
     </select>
