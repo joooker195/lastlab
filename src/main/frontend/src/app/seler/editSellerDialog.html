@@ -11,12 +11,7 @@
   <input type="text" placeholder="Введите email" ng-model="sellerParams.email" class="textField">
   <h3>Адрес доставки</h3>
   <input type="text" placeholder="Введите адрес доставки" ng-model="sellerParams.deliveryAddress" class="textField"><br>
-  <h3>Выберите продажу</h3>
 
-  <select name="saleSelect" ng-model="sellerParams.saleSelect" class="textField">
-    <option ng-repeat="option in sells"
-            ng-value="option.id" class="panel panel-primary">Заказана  {{option.orderDate}}</option>
-  </select><br>
 
   <button class="btn btn-primary" ng-click="editSellerOkClickHandler(this)">Изменить</button>
   <button class="btn btn-danger" ng-click="addSellerCancelClickHandler(this)">Отмена</button>

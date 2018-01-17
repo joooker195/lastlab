@@ -65,10 +65,10 @@ public class Sale
     @JsonManagedReference
     private Set<Seller> sellers = new HashSet<>();*/
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id")
     @JsonBackReference
-    private Buyer buyer;*/
+    private Buyer buyer;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id")
@@ -111,7 +111,7 @@ public class Sale
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.amountProduct = amountProduct;
-     //   this.buyer = buyer;
+        this.buyer = buyer;
         this.seller = seller;
         this.item = product;
     }
@@ -188,9 +188,9 @@ public class Sale
         this.amountProduct = amountProduct;
     }
 
-    public Seller getSeller() {
+    /*public Seller getSeller() {
         return seller;
-    }
+    }*/
 
     public void setSeller(Seller seller) {
         this.seller = seller;

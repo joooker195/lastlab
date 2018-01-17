@@ -6,22 +6,10 @@
   /** @ngInject */
   function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog,$state,allProducts) {
     var vm  =this;
-     $scope.items = allProducts.data;
+    $scope.items = allProducts.data;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
-    var discountMas = [];
-    for(var i = 0;i<$scope.items.length;i++){
-      var discounts = $scope.items[i].discounts;
-      console.log(discounts);
-      for(var j =0;j<discounts.length;j++){
-        var actualFromDate = UtilsFunctionsFactory.toDate(discounts[j].actualFrom);
-        var actualToDate = UtilsFunctionsFactory.toDate(discounts[j].actualTo);
-        discounts[j].actualFrom = actualFromDate;
-        discounts[j].actualTo = actualToDate;
-        discountMas.unshift(discounts[j])
-      }
-    }
+    console.log(allProducts.data);
 
-    $scope.discountsMas= discountMas;
     $scope.showAddDiv=false;
 
 
@@ -47,7 +35,7 @@
       name: "",
       unitCoast: "",
       unitName: "",
-      selectedSale:0
+      selectedSale:""
     };
 
     $scope.modalShown = false;
@@ -56,6 +44,7 @@
       $scope.params.name="";
       $scope.params.unitCoast="";
       $scope.params.unitName="";
+      $scope.params.count="";
       $scope.params.selectedSale=0;
       ngDialog.open({ template: 'app/item/addItem.html',
        className: 'ngdialog-theme-default',
@@ -113,7 +102,7 @@
       $scope.params.name=scope.item.name;
       $scope.params.unitCoast = scope.item.unitCoast;
       $scope.params.unitName=scope.item.unitName;
-
+      $scope.params.selectedSale=scope.item.selectedSale;
       ngDialog.open({ template: 'app/item/editProduct.html',
         className: 'ngdialog-theme-default',
         scope: $scope

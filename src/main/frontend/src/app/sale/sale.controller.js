@@ -7,6 +7,8 @@
   /** @ngInject */
   function SaleController($scope, $http,ngDialog,UtilsFunctionsFactory,allSells,$state) {
     var vm = this;
+    console.log(allSells.data);
+
     for (var i = 0;i<allSells.data.length;i++){
       var formattedOrderDate = UtilsFunctionsFactory.toDate(allSells.data[i].orderDate);
       var formattedDeliveryDate = UtilsFunctionsFactory.toDate(allSells.data[i].deliveryDate);
@@ -25,7 +27,7 @@
     }
     $scope.salesProducts = products;
 
-    var buyers = [];
+    /*var buyers = [];
     for (var i= 0;i<$scope.sales.length;i++){
       var buyersS = $scope.sales[i].buyers;
       console.log(buyersS);
@@ -33,7 +35,7 @@
         buyers.unshift(buyersS[j]);
       }
     }
-    $scope.salesBuyers = buyers;
+    $scope.salesBuyers = buyers;*/
 
 
 
@@ -94,9 +96,9 @@
       orderDate:"",
       deliveryDate : "",
       amountProduct:"",
-      selectedItem:0,
-      selectedBuyer:0,
-      selectedSeller:0
+      selectedItem:"",
+      selectedBuyer:"",
+      selectedSeller:""
     };
     $scope.showAddDiv = false;
 
@@ -105,9 +107,9 @@
       $scope.saleParams.orderDate="";
       $scope.saleParams.deliveryDate="";
       $scope.saleParams.amountProduct="";
-      $scope.saleParams.selectedBuyer=0;
-      $scope.saleParams.selectedItem=0;
-      $scope.saleParams.selectedSeller=0;
+      $scope.saleParams.selectedBuyer="";
+      $scope.saleParams.selectedItem="";
+      $scope.saleParams.selectedSeller="";
       ngDialog.open({ template: 'app/sale/addSaleDialog.html',
         className: 'ngdialog-theme-default',
         scope: $scope

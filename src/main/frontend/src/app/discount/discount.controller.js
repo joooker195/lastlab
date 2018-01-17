@@ -7,6 +7,7 @@
   /** @ngInject */
   function DiscountController($scope,$state, $http,UtilsFunctionsFactory,ngDialog,allDiscounts) {
     var vm = this;
+    console.log(allDiscounts.data);
     for (var i = 0;i<allDiscounts.data.length;i++){
       var formattedFromDate = UtilsFunctionsFactory.toDate(allDiscounts.data[i].actualFrom);
       var formattedToDate = UtilsFunctionsFactory.toDate(allDiscounts.data[i].actualTo);
