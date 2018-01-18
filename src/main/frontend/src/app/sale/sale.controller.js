@@ -144,6 +144,9 @@
       $scope.saleParams.orderDate=saleScope.sale.orderDate;
       $scope.saleParams.deliveryDate=saleScope.sale.deliveryDate;
       $scope.saleParams.amountProduct=saleScope.sale.amountProduct;
+      $scope.saleParams.selectedBuyer="";
+      $scope.saleParams.selectedSeller="";
+      $scope.saleParams.selectedItem="";
       ngDialog.open({ template: 'app/sale/editSaleDialog.html',
         className: 'ngdialog-theme-default',
         scope: $scope

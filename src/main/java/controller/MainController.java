@@ -254,12 +254,16 @@ public class MainController
     public ResponseEntity updateSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId,
                                      @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
                                      @RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
-                                     @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate){
+                                     @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate,
+                                     @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId,
+                                     @RequestParam(value = Sale.SELECTED_SELLER_ID) Integer sellerId,
+                                     @RequestParam(value = Sale.SELECTED_ITEM_ID) Integer itemId){
         try{
             Sale existingSale = dbSale.getSaleById(saleId);
             existingSale.setDeliveryDate(new Date(deliveryDate));
             existingSale.setOrderDate(new Date(orderDate));
             existingSale.setAmountProduct(amountProduct);
+            Seller selectedSeller = dbSeller.getSellerById(sellerId);
             dbSale.updateSale(existingSale);
             return new ResponseEntity(HttpStatus.OK);
         }

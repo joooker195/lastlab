@@ -5,14 +5,14 @@
   <input type="text" placeholder="Введите цену товара" ng-model="params.unitCoast">
   <h3>Единица измерения</h3>
   <input type="text" placeholder="Введите единицу измерения" ng-model="params.unitName"><br>
-  <!--<h3>Выбеите продажу</h3>
+  <h3>Выберите продажу</h3>
 
   <div class="hideScroll">
     <select name="discountSelect" ng-model="params.selectedSale" multiple>
       <option ng-repeat="option in discountsMas"
               ng-value="option.id" class="panel panel-primary">{{option.amountDiscount}} % c {{option.actualFrom}} по {{option.actualTo}}</option>
     </select>
-  </div>-->
+  </div>
 
   <div class="dialogButtons">
   <button class="btn btn-primary" ng-click="editOkHandler(this)">Изменить</button>
